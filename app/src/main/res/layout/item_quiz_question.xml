@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/questionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sample Question"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingBottom="8dp" />
+
+    <Button
+        android:id="@+id/btn0"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:text="Option 1" />
+
+    <Button
+        android:id="@+id/btn1"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:text="Option 2" />
+
+    <Button
+        android:id="@+id/btn2"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:text="Option 3" />
+
+    <Button
+        android:id="@+id/btn3"
+        android:text="Option 4"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
+</LinearLayout>

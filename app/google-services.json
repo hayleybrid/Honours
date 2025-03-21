@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "99705941499",
+    "firebase_url": "https://honourqui-default-rtdb.firebaseio.com",
+    "project_id": "honourqui",
+    "storage_bucket": "honourqui.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99705941499:android:4d091bbd9ebdfd44e42f5e",
+        "android_client_info": {
+          "package_name": "com.example.honour_qui"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtzC4dlkHYj-BdfMWYd8MYgUBeDt07wjw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
