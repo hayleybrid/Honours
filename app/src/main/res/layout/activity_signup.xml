@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Signup">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:orientation="vertical" >
+
+        <ImageButton
+            android:id="@+id/btnHome"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:src="@drawable/home1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create an Account"
+            android:gravity="center"
+            android:textSize="34sp"
+            android:background="@color/ForestGreen"
+            android:textColor="@color/white"
+            android:paddingBottom="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Input your name and choose a password!"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:background="@color/ForestGreen"
+            android:textColor="@color/white"
+            android:paddingBottom="10dp"/>
+
+
+        <TextView
+            android:paddingTop="20dp"
+            android:paddingLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/usernameTv"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:text="Enter your first name"
+            android:textColor="@color/ForestGreen"/>
+
+        <EditText
+            android:paddingLeft="30dp"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nameEdit"
+            android:inputType="text"
+            android:hint="Tap to enter your name"/>
+
+        <TextView
+            android:paddingTop="10dp"
+            android:paddingLeft="30dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/email"
+            android:textSize="24sp"
+            android:text="Enter your email address"
+            android:textColor="@color/ForestGreen"/>
+
+        <EditText
+            android:paddingTop="10dp"
+            android:paddingLeft="30dp"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/emailEdit"
+            android:inputType="textPassword"
+            android:hint="Tap to enter your password"/>
+
+
+        <TextView
+            android:paddingTop="10dp"
+            android:paddingLeft="30dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/passwordTv"
+            android:textSize="24sp"
+            android:text="Choose your password"
+            android:textColor="@color/ForestGreen"/>
+
+        <EditText
+            android:paddingTop="10dp"
+            android:paddingLeft="30dp"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/passwordEdit"
+            android:inputType="textPassword"
+            android:hint="Tap to enter your password"/>
+
+        <TextView
+            android:paddingTop="10dp"
+            android:paddingLeft="30dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/confirmPasswordTv"
+            android:textSize="24sp"
+            android:text="Confirm your password"
+            android:textColor="@color/ForestGreen"/>
+
+        <EditText
+            android:paddingTop="10dp"
+            android:paddingLeft="30dp"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/confirmPasswordEdit"
+            android:inputType="textPassword"
+            android:hint="Tap to enter your password"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Create Account"
+            android:textSize="24sp"
+            android:id="@+id/btnSignUp"/>
+
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Login">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/btnHome"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@color/white"
+                android:src="@drawable/home1" />
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Welcome!"
+            android:gravity="center"
+            android:textSize="34sp"
+            android:background="@color/ForestGreen"
+            android:textColor="@color/white"
+            android:paddingBottom="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please login to continue"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:background="@color/ForestGreen"
+            android:textColor="@color/white"
+            android:paddingBottom="10dp"/>
+
+
+        <TextView
+            android:paddingTop="50dp"
+            android:paddingLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/usernameTv"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:text="Please enter your name"
+            android:textColor="@color/ForestGreen"/>
+
+        <EditText
+            android:paddingTop="30dp"
+            android:paddingLeft="30dp"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/usernameEdit"
+            android:inputType="text"
+            android:hint="Tap to enter your name"/>
+
+        <TextView
+            android:paddingTop="30dp"
+            android:paddingLeft="30dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/passwordTv"
+            android:textSize="24sp"
+            android:text="Please enter your password"
+            android:textColor="@color/ForestGreen"/>
+
+        <EditText
+            android:paddingTop="30dp"
+            android:paddingLeft="30dp"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/passwordEdit"
+            android:inputType="textPassword"
+            android:hint="Tap to enter your password"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Login"
+            android:textSize="24sp"
+            android:id="@+id/btnLogin"/>
+
+        <TextView
+            android:paddingLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/signupTv"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:text="If you don't have an account, create one below "
+            android:textColor="@color/ForestGreen"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Sign up here!"
+            android:textSize="24sp"
+            android:id="@+id/btnSignup"/>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

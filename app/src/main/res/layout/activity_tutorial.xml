@@ -8,20 +8,31 @@
     android:id="@+id/main"
     tools:context=".TutorialActivity">
 
-    <TextView
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Question 7/20"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:id="@+id/picture_indicator_textview"/>
+        android:padding="5dp">
 
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginVertical="8dp"
-        tools:progress="70"
-        android:id="@+id/picture_progress_indicator"/>
+        <ImageButton
+            android:id="@+id/btnHome"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:src="@drawable/home1" />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+
+
 
     <LinearLayout
     android:layout_width="wrap_content"
@@ -30,25 +41,24 @@
     android:padding="5dp"
     android:layout_gravity="center">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:text="Back"
-        android:id="@+id/btnBack"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginRight="50dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="Back"
+            android:id="@+id/btnBack"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="50dp"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:text="Next"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/btnNxt"
-        />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="Next"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/btnNxt" />
 
-</LinearLayout>
+    </LinearLayout>
 
 
     <LinearLayout

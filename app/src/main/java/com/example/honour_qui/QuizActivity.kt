@@ -1,7 +1,7 @@
 package com.example.honour_qui
 
+import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -13,9 +13,10 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.honour_qui.databinding.ActivityQuizBinding
 import com.example.honour_qui.databinding.ScoreDialogBinding
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 
@@ -30,14 +31,14 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     private var score = 0
     private var timer: CountDownTimer? = null
     private lateinit var firebaseData: FirebaseData
-    val database: DatabaseReference = FirebaseDatabase.getInstance().reference
+    private val database: DatabaseReference = FirebaseDatabase.getInstance().reference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         quizId = intent.getStringExtra("quiz_id")
         if (quizId == null) {
@@ -50,6 +51,18 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         firebaseData = FirebaseData(database)
 
         loadQuizzesFromFirebaseData()
+
+        binding.btnLogout.setOnClickListener {
+            Firebase.auth.signOut()
+            val intent = Intent(this, Login::class.java)
+            startActivity(intent)
+            finish()
+        }
+        binding.btnHome.setOnClickListener {
+            val signupIntent = Intent(this, MainActivity::class.java)
+            startActivity(signupIntent)
+        }
+
     }
 
     private fun loadQuizzesFromFirebaseData() {
@@ -122,17 +135,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             Log.e("Image Loading", "Image resource not found: ${currentQuestion.imageUrl}")
             // Handle the case where the image isn't found (e.g., display a placeholder image)
         }
-/*
-        if (!currentQuestion.imageUrl.isNullOrEmpty()) {
-            FirebaseStorage.getInstance().getReferenceFromUrl(currentQuestion.imageUrl)
-                .downloadUrl
-                .addOnSuccessListener { uri: Uri? ->
-                    Picasso.get().load(uri).into(binding.questionImage)
-                }
-                .addOnFailureListener { e: Exception ->
-                    Log.e("FirebaseStorage", "Failed to load image: " + e.message)
-                }
-        }*/
+
     }
 
     override fun onClick(view: View?) {

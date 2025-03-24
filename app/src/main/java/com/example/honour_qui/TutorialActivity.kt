@@ -8,7 +8,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.storage.FirebaseStorage
+import com.example.honour_qui.databinding.ActivityTutorialBinding
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import com.squareup.picasso.Picasso
 
 
@@ -18,8 +20,6 @@ class TutorialActivity : AppCompatActivity(), View.OnClickListener {
         var tutorialSteps: List<StepsModel> = listOf()
     }
 
-
-
     private var currentStepIndex = 0
 
     private lateinit var stepDescription: TextView
@@ -28,12 +28,13 @@ class TutorialActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var btnNext: Button
     private lateinit var btnBack: Button
     private lateinit var btnQuiz: Button
-
+    private lateinit var binding: ActivityTutorialBinding
     private lateinit var tutorialModel: TutorialModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tutorial)
+        binding = ActivityTutorialBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         stepDescription = findViewById(R.id.description_textview)
         stepInfo = findViewById(R.id.info_textview)
@@ -45,6 +46,7 @@ class TutorialActivity : AppCompatActivity(), View.OnClickListener {
         btnNext.setOnClickListener(this)
         btnBack.setOnClickListener(this)
         btnQuiz.setOnClickListener(this)
+
 
         tutorialModel = intent.getSerializableExtra("tutorial_data") as? TutorialModel ?: run {
             Log.e("TutorialActivity", "Error: Tutorial data missing!")
@@ -63,6 +65,17 @@ class TutorialActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         loadTutorial()
+
+        binding.btnLogout.setOnClickListener {
+            Firebase.auth.signOut()
+            val intent = Intent(this, Login::class.java)
+            startActivity(intent)
+            finish()
+        }
+        binding.btnHome.setOnClickListener {
+            val signupIntent = Intent(this, MainActivity::class.java)
+            startActivity(signupIntent)
+        }
     }
 
     private fun loadTutorial() {

@@ -52,10 +52,12 @@ dependencies {
     implementation(libs.google.firebase.storage.ktx)
     implementation(libs.glide)
     implementation(libs.coil.compose)
+    implementation(libs.firebase.auth.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation (libs.picasso)
+    implementation (libs.play.services.location)
 
 
 }

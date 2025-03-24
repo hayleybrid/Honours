@@ -7,7 +7,7 @@ firebaseBomVersion = "33.8.0"
 firebaseCore = "21.1.1"
 glide = "4.16.0"
 googleFirebaseBom = "32.7.0"
-kotlin = "1.9.0"
+kotlin = "2.1.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -22,6 +22,8 @@ firebaseDatabaseKtx = "21.0.0"
 firebaseFirestore = "25.1.1"
 picasso = "2.8"
 firebaseStorageKtx = "21.0.1"
+playServicesLocation = "21.3.0"
+firebaseAuthKtx = "23.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -48,6 +50,8 @@ firebase-database-ktx = { group = "com.google.firebase", name = "firebase-databa
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
 google-firebase-storage-ktx = { group = "com.google.firebase", name = "firebase-storage-ktx", version.ref = "firebaseStorageKtx" }
+play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
+firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
