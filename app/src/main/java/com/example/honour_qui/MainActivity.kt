@@ -42,6 +42,11 @@ class MainActivity : AppCompatActivity() {
             Firebase.auth.signOut()
             redirectToLogin()
         }
+
+        binding.btnLeaderboard.setOnClickListener{
+            val intent = Intent(this, LeaderboardActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun redirectToLogin() {

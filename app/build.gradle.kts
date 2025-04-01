@@ -53,11 +53,11 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.coil.compose)
     implementation(libs.firebase.auth.ktx)
+    implementation(libs.androidx.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation (libs.picasso)
-    implementation (libs.play.services.location)
 
 
 }

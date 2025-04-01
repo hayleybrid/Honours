@@ -44,7 +44,7 @@ class Signup : AppCompatActivity() {
                             val username = email // You can replace this with a separate input for username if needed
 
                             // Create a user object to store in Firebase Realtime Database
-                            val newUser = Users(userId, name, email, password)
+                            val newUser = Users(userId, name, email, password, totalScore = 0)
 
                             // Save the user in Firebase Database (save only the user info, not password)
                             database.child(userId).setValue(newUser).addOnCompleteListener { dbTask ->

@@ -133,7 +133,6 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             Picasso.get().load(resID).into(binding.questionImage)
         } else {
             Log.e("Image Loading", "Image resource not found: ${currentQuestion.imageUrl}")
-            // Handle the case where the image isn't found (e.g., display a placeholder image)
         }
 
     }
@@ -202,6 +201,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             }
             scoreSubtitle.text = "$score out of $totalQuestions are correct"
             finishBtn.setOnClickListener {
+                saveUserScore(score)
                 finish()
             }
         }
@@ -217,4 +217,31 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         super.onDestroy()
         timer?.cancel()
     }
+
+    private fun saveUserScore(newScore: Int) {
+        val userId = Firebase.auth.currentUser?.uid
+        if (userId == null) {
+            Log.e("Firebase", "User not logged in")
+            return
+        }
+
+        val userScoreRef = database.child("users").child(userId).child("totalScore")
+
+        userScoreRef.get().addOnSuccessListener { snapshot ->
+            val currentTotalScore = snapshot.getValue(Int::class.java) ?: 0
+            val updatedTotalScore = currentTotalScore + newScore
+
+            userScoreRef.setValue(updatedTotalScore)
+                .addOnSuccessListener {
+                    Log.d("Firebase", "Total score updated successfully!")
+                    Toast.makeText(this, "Score saved!", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { e ->
+                    Log.e("Firebase", "Failed to update total score", e)
+                }
+        }.addOnFailureListener { e ->
+            Log.e("Firebase", "Failed to retrieve current score", e)
+        }
+    }
+
 }

@@ -30,12 +30,14 @@
             android:name=".Signup"
             android:exported="false" />
         <activity
+            android:name=".LeaderboardActivity"
+            android:exported="false" />
+        <activity
             android:name=".TutorialActivity"
             android:exported="false" />
         <activity
             android:name=".QuizActivity"
             android:exported="false" />
-        <activity android:name="com.example.honour_qui.TutorialListAdapter" />
 
     </application>
 
