@@ -1,7 +1,7 @@
 package com.example.honour_qui
 
 import java.io.Serializable
-
+//tutorial data class
 data class TutorialModel(
     val guideId: String,
     val title: String,

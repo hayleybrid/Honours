@@ -23,7 +23,6 @@ class LeaderboardAdapter(private val scores: List<Users>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val entry = scores[position]
-
         holder.rankTextView.text = (position + 1).toString()
         holder.nameTextView.text = entry.name
         holder.scoreTextView.text = entry.totalScore.toString()

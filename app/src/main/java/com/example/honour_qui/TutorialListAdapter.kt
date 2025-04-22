@@ -19,22 +19,19 @@ class TutorialListAdapter(private var tutorialModelList: MutableList<TutorialMod
             binding.apply {
                 quizTitleText.text = model.title
 
-                // If model.image is the name of the image (e.g., "image_name"), load it from resources
+                // load from drawable resource
                 val resID = binding.root.context.resources.getIdentifier(model.image, "drawable", binding.root.context.packageName)
-
                 if (resID != 0) {
-                    // Load the image using Picasso if it's a valid drawable resource
+                    // load image from picasso
                     Picasso.get().load(resID).into(tutorialImage)
                 } else {
-                    // Log an error if the image is not found
+                    // error logging
                     Log.e("Image Loading", "Image resource not found: ${model.image}")
-                    // Optionally, set a placeholder image if the resource isn't found
+                    // placeholder if no image
                     Picasso.get().load(R.drawable.alarm_clock).into(tutorialImage)
                 }
-
                 Log.d("TutorialAdapter", "Image: ${model.image}")
-
-                // Set the click listener for the item
+                //on click listener
                 root.setOnClickListener {
                     val intent = Intent(root.context, TutorialActivity::class.java).apply {
                         putExtra("tutorial_data", model)

@@ -24,12 +24,14 @@ class Login: AppCompatActivity(), View.OnClickListener{
         binding.btnLogin.setOnClickListener {
             val email = binding.usernameEdit.text.toString()
             val password = binding.passwordEdit.text.toString()
+            //firebase authorisation
             if (email.isNotEmpty() && password.isNotEmpty()){
                 auth.signInWithEmailAndPassword(email, password).addOnCompleteListener{
                     if (it.isSuccessful){
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                     } else {
+                        //exception handling
                         Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -37,7 +39,7 @@ class Login: AppCompatActivity(), View.OnClickListener{
                 Toast.makeText(this, "Fields cannot be empty", Toast.LENGTH_SHORT).show()
             }
         }
-
+        //open signup
         binding.btnSignup.setOnClickListener {
             val signupIntent = Intent(this, Signup::class.java)
             startActivity(signupIntent)

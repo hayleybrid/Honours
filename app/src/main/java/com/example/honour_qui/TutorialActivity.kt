@@ -19,9 +19,7 @@ class TutorialActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
         var tutorialSteps: List<StepsModel> = listOf()
     }
-
     private var currentStepIndex = 0
-
     private lateinit var stepDescription: TextView
     private lateinit var stepInfo: TextView
     private lateinit var stepImage: ImageView
@@ -47,15 +45,15 @@ class TutorialActivity : AppCompatActivity(), View.OnClickListener {
         btnBack.setOnClickListener(this)
         btnQuiz.setOnClickListener(this)
 
-
+        //get tutorial data
         tutorialModel = intent.getSerializableExtra("tutorial_data") as? TutorialModel ?: run {
-            Log.e("TutorialActivity", "Error: Tutorial data missing!")
+            Log.e("TutorialActivity", "Error: Tutorial data missing")
             finish()
             return
         }
-
+        //error handling
         Log.d("TutorialActivity", "Received tutorial: $tutorialModel")
-
+        //populate tutorial
         tutorialSteps = tutorialModel.steps
 
         if (tutorialSteps.isEmpty()) {
@@ -93,13 +91,14 @@ class TutorialActivity : AppCompatActivity(), View.OnClickListener {
 
 
         /*
+        //images stored in firebase
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.getReferenceFromUrl(currentStep.imageUrl)
 
         storageRef.downloadUrl.addOnSuccessListener { uri ->
             Picasso.get().load(uri).into(stepImage)
         }.addOnFailureListener {
-            Log.e("FirebaseStorage", "Failed to get image URL: ${it.message}")
+            Log.e("FirebaseStorage", "Failed to get imageurl: ${it.message}")
         }
 */
         val resID = resources.getIdentifier(currentStep.imageUrl, "drawable", packageName)
@@ -108,15 +107,15 @@ class TutorialActivity : AppCompatActivity(), View.OnClickListener {
             Picasso.get().load(resID).into(stepImage)
         } else {
             Log.e("Image Loading", "Image resource not found: ${currentStep.imageUrl}")
-            // Handle the case where the image isn't found (e.g., display a placeholder image)
+            // handle image not found with placeholder
         }
-
+        //button visibility
         btnBack.visibility = if (currentStepIndex == 0) View.GONE else View.VISIBLE
         btnNext.visibility = if (currentStepIndex == tutorialSteps.size - 1) View.GONE else View.VISIBLE
         btnQuiz.visibility = if (currentStepIndex == tutorialSteps.size - 1) View.VISIBLE else View.GONE
     }
 
-
+        //button click handling
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.btnNxt -> {
@@ -137,14 +136,12 @@ class TutorialActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-
+    //start quiz
     private fun startQuizActivity() {
-
-
+        //pass quizid to quiz
         val intent = Intent(this, QuizActivity::class.java).apply {
             putExtra("quiz_id", tutorialModel.quizId)
         }
-
         startActivity(intent)
         finish()
 

@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Honour_Qui" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/SeaGreen</item>
+        <item name="colorPrimary">@color/Green</item>
     </style>
 
     <style name="Theme.Honour_Qui" parent="Base.Theme.Honour_Qui" />

@@ -22,6 +22,7 @@ import kotlinx.coroutines.launch
 
 class QuizActivity : AppCompatActivity(), View.OnClickListener {
 
+    //variables
     private lateinit var binding: ActivityQuizBinding
     private var quizId: String? = null
     private var selectedQuiz: QuizModel? = null
@@ -36,18 +37,20 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //bind xml
         binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        //get quiz id from tutorial
         quizId = intent.getStringExtra("quiz_id")
         if (quizId == null) {
-            Log.e("QuizActivity", "Error: Quiz ID missing!")
-            Toast.makeText(this, "Error loading quiz!", Toast.LENGTH_SHORT).show()
+            Log.e("QuizActivity", "Error: Quiz ID missing")
+            Toast.makeText(this, "Error loading quiz", Toast.LENGTH_SHORT).show()
             finish()
             return
         }
 
+        //database reference
         firebaseData = FirebaseData(database)
 
         loadQuizzesFromFirebaseData()
@@ -70,19 +73,19 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             try {
                 val quizzes = firebaseData.loadQuizzes()
                 selectedQuiz = quizzes.find { it.quizId == quizId }
-
+                //error handling
                 if (selectedQuiz == null) {
                     Log.e("QuizActivity", "Quiz not found!")
                     Toast.makeText(this@QuizActivity, "Quiz not found!", Toast.LENGTH_SHORT).show()
                     finish()
                     return@launch
                 }
-
+                //populate quiz
                 questionModelList = selectedQuiz!!.questionList
 
                 if (questionModelList.isNullOrEmpty()) {
                     Log.e("QuizActivity", "No questions found for quizId: $quizId")
-                    Toast.makeText(this@QuizActivity, "No questions available!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@QuizActivity, "Questions not loaded", Toast.LENGTH_SHORT).show()
                     finish()
                     return@launch
                 }
@@ -90,12 +93,12 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                 setupQuizUI()
             } catch (e: Exception) {
                 Log.e("QuizActivity", "Failed to load quizzes: ${e.message}")
-                Toast.makeText(this@QuizActivity, "Error loading quiz!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@QuizActivity, "Error loading quiz", Toast.LENGTH_SHORT).show()
                 finish()
             }
         }
     }
-
+    //buttons for quiz answer options
     private fun setupQuizUI() {
         binding.btn0.setOnClickListener(this)
         binding.btn1.setOnClickListener(this)
@@ -126,7 +129,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         binding.btn3.text = currentQuestion.options[3]
 
         resetButtonColors()
-
+        //locate image, bind to question
         val resID = resources.getIdentifier(currentQuestion.imageUrl, "drawable", packageName)
 
         if (resID != 0) {
@@ -140,20 +143,19 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View?) {
         if (view == null) return
         resetButtonColors()
-
+        //selected answer handling
         val clickedBtn = view as? android.widget.Button ?: return
         if (clickedBtn.id == R.id.next_btn) {
             if (selectedAnswer.isEmpty()) {
                 Toast.makeText(this, "Please select an answer", Toast.LENGTH_SHORT).show()
                 return
             }
-
+            //if correct add to score
             if (selectedAnswer == questionModelList!![currentQuestionIndex].correct) {
                 score++
             }
-
+            //next question
             currentQuestionIndex++
-
             displayQuestion()
         } else {
             selectedAnswer = clickedBtn.text.toString()
@@ -163,30 +165,31 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
 
 
     private fun resetButtonColors() {
-        binding.btn0.setBackgroundColor(ContextCompat.getColor(this, R.color.Gray))
-        binding.btn1.setBackgroundColor(ContextCompat.getColor(this, R.color.Gray))
-        binding.btn2.setBackgroundColor(ContextCompat.getColor(this, R.color.Gray))
-        binding.btn3.setBackgroundColor(ContextCompat.getColor(this, R.color.Gray))
+        binding.btn0.setBackgroundColor(ContextCompat.getColor(this, R.color.LightGrey))
+        binding.btn1.setBackgroundColor(ContextCompat.getColor(this, R.color.LightGrey))
+        binding.btn2.setBackgroundColor(ContextCompat.getColor(this, R.color.LightGrey))
+        binding.btn3.setBackgroundColor(ContextCompat.getColor(this, R.color.LightGrey))
     }
 
+    //timer for 10 minutes
     private fun startTimer() {
-        timer = object : CountDownTimer(30000, 1000) {
+        timer = object : CountDownTimer(600000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 binding.timerIndicatorTextview.text = "Time left: ${millisUntilFinished / 1000}s"
             }
 
             override fun onFinish() {
                 Toast.makeText(this@QuizActivity, "Time's up!", Toast.LENGTH_SHORT).show()
-                currentQuestionIndex++
-                displayQuestion()
+                finishQuiz()
             }
         }.start()
     }
 
+    //end quiz
     private fun finishQuiz() {
         val totalQuestions = questionModelList?.size
         val percentage = ((score.toFloat() / totalQuestions!!.toFloat() ) *100 ).toInt()
-
+        //pass or fail score dialog
         val dialogBinding = ScoreDialogBinding.inflate(layoutInflater)
         dialogBinding.apply {
             scoreProgressIndicator.progress = percentage
@@ -194,7 +197,6 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             if (percentage > 60) {
                 scoreTitle.text = "Congrats! You have passed"
                 scoreTitle.setTextColor(Color.BLACK)
-
             } else {
                 scoreTitle.text = "Oops! You have failed"
                 scoreTitle.setTextColor(Color.RED)
@@ -218,13 +220,14 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         timer?.cancel()
     }
 
+    //save score to database
     private fun saveUserScore(newScore: Int) {
         val userId = Firebase.auth.currentUser?.uid
         if (userId == null) {
             Log.e("Firebase", "User not logged in")
             return
         }
-
+            //get reference
         val userScoreRef = database.child("users").child(userId).child("totalScore")
 
         userScoreRef.get().addOnSuccessListener { snapshot ->

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
@@ -56,19 +56,18 @@
 
 
         <TextView
-            android:paddingTop="50dp"
+            android:paddingTop="30dp"
             android:paddingLeft="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/usernameTv"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:text="Please enter your name"
+            android:text="Please enter your email address"
             android:textColor="@color/ForestGreen"/>
 
         <EditText
-            android:paddingTop="30dp"
-            android:paddingLeft="30dp"
+            android:padding="30dp"
             android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -125,7 +124,4 @@
 
     </LinearLayout>
 
-
-
-
-</LinearLayout>
+</ScrollView>

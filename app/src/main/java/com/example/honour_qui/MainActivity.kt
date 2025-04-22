@@ -24,11 +24,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        //initialise firebase instance
         database = FirebaseDatabase.getInstance().reference
+        //load data
         dataLoader = FirebaseData(database)
+        //authorisation
         auth = FirebaseAuth.getInstance()
 
+        //validate user is logged in
         if (auth.currentUser == null) {
             redirectToLogin()
         } else {
@@ -42,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             Firebase.auth.signOut()
             redirectToLogin()
         }
-
+        //leaderboard
         binding.btnLeaderboard.setOnClickListener{
             val intent = Intent(this, LeaderboardActivity::class.java)
             startActivity(intent)
@@ -54,13 +57,13 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
+    //recycler view
     private fun setupRecyclerView() {
         adapter = TutorialListAdapter(mutableListOf())
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
     }
-
+    //load data from firebase
     private suspend fun loadData() {
         try {
             val tutorials = dataLoader.loadTutorials()
@@ -69,13 +72,13 @@ class MainActivity : AppCompatActivity() {
 
             withContext(Dispatchers.Main) {
                 adapter.updateList(tutorials)
-                Log.i("firebase", "Tutorials Loaded Successfully: $tutorials")
-                Log.i("firebase", "Quizzes Loaded Successfully: $quizzes")
-                Log.i("firebase", "Users Loaded Successfully: $users")
+                Log.i("Firebase", "Tutorials Loaded Successfully: $tutorials")
+                Log.i("Firebase", "Quizzes Loaded Successfully: $quizzes")
+                Log.i("Firebase", "Users Loaded Successfully: $users")
 
             }
         } catch (e: Exception) {
-            Log.e("firebase", "Error loading data: ${e.localizedMessage}", e)
+            Log.e("Firebase", "error loading data: ${e.localizedMessage}", e)
         }
     }
 

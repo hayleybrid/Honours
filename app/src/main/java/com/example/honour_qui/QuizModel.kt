@@ -2,6 +2,7 @@ package com.example.honour_qui
 
 import java.io.Serializable
 
+//quiz data class
 data class QuizModel(
     val quizId : String,
     val title : String,

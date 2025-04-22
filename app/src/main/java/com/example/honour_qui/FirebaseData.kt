@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 
 class FirebaseData(private val database: DatabaseReference) {
 
-    // Load Tutorials from Firebase
+    // load from firebase database
     suspend fun loadTutorials(): List<TutorialModel> {
         return withContext(Dispatchers.IO) {
             val snapshot = database.child("tutorials").get().await()
@@ -20,7 +20,6 @@ class FirebaseData(private val database: DatabaseReference) {
         }
     }
 
-    // Load Quizzes from Firebase
     suspend fun loadQuizzes(): List<QuizModel> {
         return withContext(Dispatchers.IO) {
             val snapshot = database.child("quizzes").get().await()

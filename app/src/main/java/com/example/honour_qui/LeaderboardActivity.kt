@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.honour_qui.databinding.ActivityLeaderboardBinding
+import com.example.honour_qui.databinding.ActivityTutorialBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.database.FirebaseDatabase
@@ -19,7 +20,8 @@ class LeaderboardActivity  : AppCompatActivity() {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_leaderboard)
+            binding = ActivityLeaderboardBinding.inflate(layoutInflater)
+            setContentView(binding.root)
 
             recyclerView = findViewById(R.id.recycler_view)
             recyclerView.layoutManager = LinearLayoutManager(this)
@@ -42,12 +44,11 @@ class LeaderboardActivity  : AppCompatActivity() {
 
         private fun getLeaderboard(callback: (List<Users>) -> Unit) {
             val usersRef = database.child("users")
-
             usersRef.orderByChild("totalScore").get()
                 .addOnSuccessListener { snapshot ->
                     val scores = snapshot.children.mapNotNull { it.getValue(Users::class.java) }
-                        .sortedByDescending { it.totalScore } // sort by highest score
-
+                        .sortedWith(compareByDescending<Users> { it.totalScore } // sort list in descending order
+                            .thenBy { it.name.lowercase() }) //alphabetical order
                     callback(scores) // send sorted users to adapter
                 }
                 .addOnFailureListener { e ->
