@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/usernameEdit"
             android:inputType="text"
-            android:hint="Tap to enter your name"/>
+            android:hint="Tap to enter your email address"/>
 
         <TextView
             android:paddingTop="30dp"

@@ -1,4 +1,7 @@
 package com.example.honour_qui
+//Hayley Bridges
+//S2333704
+//Honours Project
 
 import android.content.Intent
 import android.os.Bundle
